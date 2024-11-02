@@ -55,6 +55,85 @@ Algorytm Shunting Yard autorstwa Edsgera Dijkstry służy do konwersji wyrażeń
 
 ---
 
+### Przykład konwersji wyrażenia infiksowego na ONP
+
+Przeanalizujmy krok po kroku działanie algorytmu Shunting Yard na przykładzie wyrażenia:
+
+`3 + 4 * 2 / ( 1 - 5 ) ^ 2`
+
+
+**Kroki działania algorytmu:**
+
+1. **Token `3`**: To liczba, dodajemy do `output`.
+   - **Output**: `3`
+   - **Stack**: `[]`
+
+2. **Token `+`**: To operator, dodajemy na stos.
+   - **Output**: `3`
+   - **Stack**: `['+']`
+
+3. **Token `4`**: To liczba, dodajemy do `output`.
+   - **Output**: `3 4`
+   - **Stack**: `['+']`
+
+4. **Token `*`**: To operator o wyższym priorytecie niż `+`, więc dodajemy na stos.
+   - **Output**: `3 4`
+   - **Stack**: `['+', '*']`
+
+5. **Token `2`**: To liczba, dodajemy do `output`.
+   - **Output**: `3 4 2`
+   - **Stack**: `['+', '*']`
+
+6. **Token `/`**: To operator. Ma równy priorytet jak `*`, więc zdejmujemy `*` ze stosu do `output`, a następnie dodajemy `/` na stos.
+   - **Output**: `3 4 2 *`
+   - **Stack**: `['+']`
+   - **Następnie** dodajemy `/` na stos:
+   - **Output**: `3 4 2 *`
+   - **Stack**: `['+', '/']`
+
+7. **Token `(`**: To lewy nawias, dodajemy go na stos.
+   - **Output**: `3 4 2 *`
+   - **Stack**: `['+', '/', '(']`
+
+8. **Token `1`**: To liczba, dodajemy do `output`.
+   - **Output**: `3 4 2 * 1`
+   - **Stack**: `['+', '/', '(']`
+
+9. **Token `-`**: To operator, dodajemy na stos.
+   - **Output**: `3 4 2 * 1`
+   - **Stack**: `['+', '/', '(', '-']`
+
+10. **Token `5`**: To liczba, dodajemy do `output`.
+    - **Output**: `3 4 2 * 1 5`
+    - **Stack**: `['+', '/', '(', '-']`
+
+11. **Token `)`**: To prawy nawias, więc przenosimy operatory ze stosu do `output` aż do napotkania lewego nawiasu `(`.
+    - Przenosimy `-` z `stack` do `output`.
+    - Usuwamy `(`.
+    - **Output**: `3 4 2 * 1 5 -`
+    - **Stack**: `['+', '/']`
+
+12. **Token `^`**: To operator o wyższym priorytecie niż `/`, dodajemy go na stos.
+    - **Output**: `3 4 2 * 1 5 -`
+    - **Stack**: `['+', '/', '^']`
+
+13. **Token `2`**: To liczba, dodajemy do `output`.
+    - **Output**: `3 4 2 * 1 5 - 2`
+    - **Stack**: `['+', '/', '^']`
+
+**Przeniesienie pozostałych operatorów ze stosu:**
+
+Po zakończeniu przetwarzania wyrażenia, przenosimy wszystkie pozostałe operatory ze stosu do `output`:
+- Najpierw `^`, następnie `/`, a na końcu `+`.
+
+**Wynik końcowy w ONP**:
+
+`3 4 2 * 1 5 - 2 ^ / +`
+
+---
+
+Dzięki temu uzyskaliśmy końcowy wynik wyrażenia w ONP. Możemy teraz użyć go do wykonania obliczeń za pomocą kalkulatora ONP.
+
 ## 4. Implementacja kalkulatora ONP w Pythonie
 
 Poniżej znajduje się kod w Pythonie, który realizuje konwersję wyrażenia infiksowego do ONP oraz oblicza wynik wyrażenia w ONP.
