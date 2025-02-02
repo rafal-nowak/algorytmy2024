@@ -1,12 +1,12 @@
-def binarny_na_dziesietny (binarna,system):
-    binarna = str(binarna)
-    binarna = binarna[::-1]
-    potega = 1
+def dziesietny_na_system(liczba, system):
+    liczba = int(liczba)
+    zapisanie = ''
+    while liczba != 0:
+        reszta = liczba % system
+        liczba = liczba // system
+        zapisanie = zapisanie + str(reszta)
+    zapisanie = zapisanie[::-1]
+    print(zapisanie)
 
-    dziesietna = 0
-    for i in range(len(binarna)):
-        dziesietna += int(binarna[i]) * potega
-        potega = potega * system
-    print(dziesietna)
 
-binarny_na_dziesietny(1001, 2)
+dziesietny_na_system(16, 2)
