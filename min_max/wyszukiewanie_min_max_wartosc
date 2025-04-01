@@ -1,0 +1,12 @@
+liczby = [3, 7, 2, 8, 1, 4]
+najmniejsza = liczby[0]
+najwieksza = liczby[0]
+
+for liczba in liczby:
+  if liczba < najmniejsza:
+    najmniejsza = liczba
+  if liczba > najwieksza:
+    najwieszka = liczba
+
+print(najmniejsza)
+print(najwieksza)
