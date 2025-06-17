@@ -1,0 +1,45 @@
+import time
+
+# Iteracyjna funkcja
+def szybkie_iteracyjne(podstawa, wykladnik):
+    result = 1
+    while wykladnik > 0:
+        if wykladnik % 2 == 1:
+            result *= podstawa
+        podstawa *= podstawa
+        wykladnik //= 2
+    return result
+
+# Rekurencyjna funkcja
+def szybkie_rekurencyjne(podstawa, wykladnik):
+    if wykladnik == 0:
+        return 1
+    if wykladnik % 2 == 0:
+        polowa_potegi = szybkie_rekurencyjne(podstawa, wykladnik // 2)
+        return polowa_potegi * polowa_potegi
+    else:
+        return podstawa * szybkie_rekurencyjne(podstawa, wykladnik - 1)
+
+# Funkcja testująca i porównująca prędkość
+def testuj_algorytmy(podstawa, wykladnik):
+
+    start_iter = time.perf_counter()
+    wynik_iter = szybkie_iteracyjne(podstawa, wykladnik)
+    czas_iter = (time.perf_counter() - start_iter) * 1000  # w ms
+
+    start_rek = time.perf_counter()
+    wynik_rek = szybkie_rekurencyjne(podstawa, wykladnik)
+    czas_rek = (time.perf_counter() - start_rek) * 1000  # w ms
+
+    assert wynik_iter == wynik_rek, "Błąd: Wyniki się różnią!"
+
+    print(f"Wynik: {wynik_iter}")
+    print(f"Czas iteracyjnie: {czas_iter:.4f} ms")
+    print(f"Czas rekurencyjnie: {czas_rek:.4f} ms")
+
+if __name__ == "__main__":
+
+  p = int(input("Podstawa potegi = "))
+  w = int(input("Wykladnik potegi = "))
+
+  print(f"{testuj_algorytmy(p, w)}")
