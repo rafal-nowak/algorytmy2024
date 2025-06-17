@@ -1,0 +1,14 @@
+def szybkie_iteracyjne(podstawa, wykladnik):
+    result = 1
+    while wykladnik > 0:
+        if wykladnik % 2 == 1:
+            result *= podstawa
+        podstawa *= podstawa
+        wykladnik //= 2
+    return result
+
+if __name__ == "__main__":
+    p = int(input("Podstawa potegi = "))
+    w = int(input("Wykladnik potegi = "))
+
+    print(f"Wynik potegi = {szybkie_iteracyjne(p, w)}")

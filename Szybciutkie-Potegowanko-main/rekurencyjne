@@ -1,0 +1,14 @@
+def szybkie_rekurencyjne(podstawa, wykladnik):
+    if wykladnik == 0:
+        return 1
+    if wykladnik % 2 == 0:
+        polowa_potegi = szybkie_rekurencyjne(podstawa, wykladnik // 2)
+        return polowa_potegi * polowa_potegi
+    else:
+        return podstawa * szybkie_rekurencyjne(podstawa, wykladnik - 1)
+
+if __name__ == "__main__":
+    p = int(input("Podstawa potegi = "))
+    w = int(input("Wykladnik potegi = "))
+
+    print(f"Wynik potegi = {szybkie_rekurencyjne(p, w)}")
